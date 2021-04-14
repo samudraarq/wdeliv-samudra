@@ -18,7 +18,7 @@ const Card = ({ product }) => {
           <p className={styles.name}>
             {product.name} {product.vintageYear}
           </p>
-          <p className={styles.producer}>{product.producer}</p>
+          <p className={styles.producer}>{product.grapeVarietes}</p>
           <p className={styles.country}>
             {product.region}, {product.country}
           </p>
