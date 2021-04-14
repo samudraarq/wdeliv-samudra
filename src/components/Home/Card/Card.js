@@ -2,6 +2,14 @@ import styles from "./Card.module.css";
 import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 
 const Card = ({ product }) => {
+  let qty;
+
+  if (product.qty === 0) {
+    qty = "Sold Out";
+  } else if (product.qty <= 5) {
+    qty = `${product.qty} left`;
+  }
+
   return (
     <div className={styles.card}>
       <img src={product.image} alt={product.name} className={styles.image} />
@@ -16,9 +24,21 @@ const Card = ({ product }) => {
           </p>
         </div>
         <div>
-          <p className={styles.price}>S$ {product.price.toFixed(2)}</p>
+          <div className={styles.priceContainer}>
+            <p className={styles.price}>S$ {product.price.toFixed(2)}</p>
+            {qty && (
+              <div className={styles.qty}>
+                <p>{qty}</p>
+              </div>
+            )}
+          </div>
+
           <div className={styles.cta}>
-            <button type="button" className={styles.btn}>
+            <button
+              type="button"
+              className={styles.btn}
+              disabled={product.qty === 0}
+            >
               ADD TO CART
             </button>
             <span className={styles.bookmark}>
