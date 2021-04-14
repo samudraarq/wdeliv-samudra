@@ -1,0 +1,13 @@
+.container {
+  margin-top: 5.6rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+}
+
+@media only screen and (max-width: 1100px) {
+  .container {
+    grid-template-columns: repeat(auto-fill, minmax(26rem, 36rem));
+    justify-content: center;
+  }
+}
