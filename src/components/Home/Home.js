@@ -1,5 +1,4 @@
 import Card from "./Card/Card";
-import axios from "axios";
 
 import InfiniteScroll from "react-infinite-scroller";
 
@@ -9,16 +8,7 @@ import { useContext } from "react";
 import { ProductContext } from "../Context/ProductContext";
 
 const Home = () => {
-  const { products, setProducts } = useContext(ProductContext);
-  const fetchData = (page) => {
-    axios
-      .get(
-        `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/list?page=${page}`
-      )
-      .then(function (response) {
-        setProducts([...products, ...response.data.value.products]);
-      });
-  };
+  const { fetchData, products } = useContext(ProductContext);
 
   return (
     <Container>
