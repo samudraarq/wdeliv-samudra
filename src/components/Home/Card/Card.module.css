@@ -83,3 +83,7 @@
 .bookmark {
   cursor: pointer;
 }
+
+.toast {
+  font-size: 1.6rem;
+}

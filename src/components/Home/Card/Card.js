@@ -4,6 +4,7 @@ import { ProductContext } from "../../Context/ProductContext";
 import styles from "./Card.module.css";
 import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
+import { toast } from "react-toastify";
 
 const Card = ({ product }) => {
   const { toggleBookmarked, addToCart } = useContext(ProductContext);
@@ -15,6 +16,22 @@ const Card = ({ product }) => {
   } else if (product.newQty <= 5) {
     qty = `${product.newQty} left`;
   }
+
+  const onClickCart = (id) => {
+    addToCart(id);
+    toast.info(`${product.name} ${product.vintageYear} is added to cart`, {
+      className: styles.toast,
+    });
+  };
+
+  const onClickBookmarked = (id) => {
+    toggleBookmarked(id);
+    if (product.bookmarked === false) {
+      toast.info(`${product.name} ${product.vintageYear} is bookmarked`, {
+        className: styles.toast,
+      });
+    }
+  };
 
   return (
     <div className={styles.card}>
@@ -44,13 +61,13 @@ const Card = ({ product }) => {
               type="button"
               className={styles.btn}
               disabled={product.newQty === 0}
-              onClick={() => addToCart(product.id)}
+              onClick={() => onClickCart(product.id)}
             >
               ADD TO CART
             </button>
             <span
               className={styles.bookmark}
-              onClick={() => toggleBookmarked(product.id)}
+              onClick={() => onClickBookmarked(product.id)}
             >
               {product.bookmarked === true ? (
                 <TurnedInIcon style={{ color: "#d7be69", fontSize: 28 }} />
