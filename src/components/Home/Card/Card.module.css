@@ -1,3 +1,7 @@
+.link {
+  text-decoration: none;
+}
+
 .card {
   width: 100%;
   border: 1px solid #fafafa;
@@ -6,6 +10,7 @@
   height: 100%;
   display: flex;
   padding: 2rem 3rem 2rem 2rem;
+  color: #333;
 }
 
 .image {
