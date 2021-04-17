@@ -20,10 +20,17 @@ const ProductContextProvider = ({ children }) => {
       });
   };
 
-  const toggleBookmarked = (id) => {};
+  const toggleBookmarked = (id) => {
+    const newProducts = products.map((product) =>
+      product.id === id
+        ? { ...product, bookmarked: !product.bookmarked }
+        : product
+    );
+    setProducts(newProducts);
+  };
 
   return (
-    <ProductContext.Provider value={{ fetchData, products }}>
+    <ProductContext.Provider value={{ fetchData, products, toggleBookmarked }}>
       {children}
     </ProductContext.Provider>
   );

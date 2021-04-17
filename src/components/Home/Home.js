@@ -1,11 +1,11 @@
 import Card from "./Card/Card";
 
 import InfiniteScroll from "react-infinite-scroller";
+import { useContext } from "react";
+import { ProductContext } from "../Context/ProductContext";
 
 import styles from "./Home.module.css";
 import Container from "../UI/Container";
-import { useContext } from "react";
-import { ProductContext } from "../Context/ProductContext";
 
 const Home = () => {
   const { fetchData, products } = useContext(ProductContext);

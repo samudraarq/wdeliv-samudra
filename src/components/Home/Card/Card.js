@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { ProductContext } from "../../Context/ProductContext";
+
 import styles from "./Card.module.css";
 import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
+import TurnedInIcon from "@material-ui/icons/TurnedIn";
 
 const Card = ({ product }) => {
+  const { toggleBookmarked } = useContext(ProductContext);
+
   let qty;
 
   if (product.qty === 0) {
@@ -41,8 +47,15 @@ const Card = ({ product }) => {
             >
               ADD TO CART
             </button>
-            <span className={styles.bookmark}>
-              <TurnedInNotIcon style={{ color: "#d7be69", fontSize: 28 }} />
+            <span
+              className={styles.bookmark}
+              onClick={() => toggleBookmarked(product.id)}
+            >
+              {product.bookmarked === true ? (
+                <TurnedInIcon style={{ color: "#d7be69", fontSize: 28 }} />
+              ) : (
+                <TurnedInNotIcon style={{ color: "#d7be69", fontSize: 28 }} />
+              )}
             </span>
           </div>
         </div>
