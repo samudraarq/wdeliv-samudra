@@ -1,14 +1,15 @@
 import Card from "./Card/Card";
 import axios from "axios";
-import { useState } from "react";
+
 import InfiniteScroll from "react-infinite-scroller";
 
 import styles from "./Home.module.css";
 import Container from "../UI/Container";
+import { useContext } from "react";
+import { ProductContext } from "../Context/ProductContext";
 
 const Home = () => {
-  const [products, setProducts] = useState([]);
-
+  const { products, setProducts } = useContext(ProductContext);
   const fetchData = (page) => {
     axios
       .get(
