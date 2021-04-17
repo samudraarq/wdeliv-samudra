@@ -10,3 +10,25 @@
   margin-right: 3.2rem;
   cursor: pointer;
 }
+
+.cart {
+  position: relative;
+}
+
+.cartSizeContainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #d7be69;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.cartSize {
+  color: #fff;
+  display: block;
+  margin: auto;
+}

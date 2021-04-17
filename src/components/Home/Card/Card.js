@@ -6,14 +6,14 @@ import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
 import TurnedInIcon from "@material-ui/icons/TurnedIn";
 
 const Card = ({ product }) => {
-  const { toggleBookmarked } = useContext(ProductContext);
+  const { toggleBookmarked, addToCart } = useContext(ProductContext);
 
   let qty;
 
-  if (product.qty === 0) {
+  if (product.newQty === 0) {
     qty = "Sold Out";
-  } else if (product.qty <= 5) {
-    qty = `${product.qty} left`;
+  } else if (product.newQty <= 5) {
+    qty = `${product.newQty} left`;
   }
 
   return (
@@ -43,7 +43,8 @@ const Card = ({ product }) => {
             <button
               type="button"
               className={styles.btn}
-              disabled={product.qty === 0}
+              disabled={product.newQty === 0}
+              onClick={() => addToCart(product.id)}
             >
               ADD TO CART
             </button>

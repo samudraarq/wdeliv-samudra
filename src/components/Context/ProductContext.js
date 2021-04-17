@@ -1,10 +1,11 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import axios from "axios";
 
 export const ProductContext = createContext();
 
 const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
+  const [cartSize, setCartSize] = useState(0);
 
   const fetchData = (page) => {
     axios
@@ -29,8 +30,18 @@ const ProductContextProvider = ({ children }) => {
     setProducts(newProducts);
   };
 
+  const addToCart = (id) => {
+    const newProducts = products.map((product) =>
+      product.id === id ? { ...product, newQty: product.newQty - 1 } : product
+    );
+    setProducts(newProducts);
+    setCartSize(cartSize + 1);
+  };
+
   return (
-    <ProductContext.Provider value={{ fetchData, products, toggleBookmarked }}>
+    <ProductContext.Provider
+      value={{ fetchData, products, cartSize, toggleBookmarked, addToCart }}
+    >
       {children}
     </ProductContext.Provider>
   );
