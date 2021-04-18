@@ -1,7 +1,92 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
 import styles from "./Product.module.css";
 
+import TurnedInNotIcon from "@material-ui/icons/TurnedInNot";
+import TurnedInIcon from "@material-ui/icons/TurnedIn";
+import Container from "../UI/Container";
+
 const Product = () => {
-  return <div>Hello</div>;
+  const [product, setProduct] = useState(null);
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetchProduct = () => {
+      axios
+        .get(
+          `https://zax5j10412.execute-api.ap-southeast-1.amazonaws.com/dev/api/product/${id}`
+        )
+        .then(function (response) {
+          setProduct(response.data.value);
+        });
+    };
+    fetchProduct();
+  }, [id]);
+
+  const renderContent = product && (
+    <div className={styles.productContainer}>
+      <img src={product.image} alt={product.name} className={styles.image} />
+      <div>
+        <h2 className={styles.name}>{product.name}</h2>
+        <p>
+          <span className={styles.varieties}>{product.grapeVarieties}</span>{" "}
+          {product.vintageYear}
+        </p>
+        <div className={styles.priceContainer}>
+          S$ {product.price}
+          <div className={styles.cta}>
+            <button
+              type="button"
+              className={styles.btn}
+              disabled={product.newQty === 0}
+            >
+              ADD TO CART
+            </button>
+            <span className={styles.bookmark}>
+              {product.bookmarked === true ? (
+                <TurnedInIcon style={{ color: "#d7be69", fontSize: 28 }} />
+              ) : (
+                <TurnedInNotIcon style={{ color: "#d7be69", fontSize: 28 }} />
+              )}
+            </span>
+          </div>
+        </div>
+        <div className={styles.properties}>
+          <div>
+            <h4>Region</h4>
+            <p>
+              {product.country} {product.region}
+            </p>
+          </div>
+          <div>
+            <h4>Producer</h4>
+            <p>{product.producer}</p>
+          </div>
+          <div>
+            <h4>Bottle</h4>
+            <p>{product.bottleSize}ml</p>
+          </div>
+          <div>
+            <h4>Alcohol</h4>
+            <p>{product.alcohol}%</p>
+          </div>
+        </div>
+        <h4 className={styles.descTitle}>Description</h4>
+        <p className={styles.desc}>{product.description}</p>
+        <h4 className={styles.descTitle}>Testing Notes</h4>
+        <p className={styles.desc}>{product.tastingNotes}</p>
+      </div>
+    </div>
+  );
+
+  return (
+    <Container>
+      <div className={styles.container}>{renderContent}</div>
+    </Container>
+  );
 };
 
 export default Product;

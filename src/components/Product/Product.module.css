@@ -1,0 +1,87 @@
+.container {
+  margin-top: 7.6rem;
+  font-size: 1.6rem;
+}
+
+.productContainer {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.12);
+  padding: 2rem;
+}
+
+.image {
+  width: 26rem;
+}
+
+.name {
+  font-size: 3.2rem;
+  font-weight: 200;
+  color: #d84315;
+}
+
+.varieties {
+  text-decoration: underline;
+  margin-top: 1rem;
+  font-size: 2rem;
+}
+
+.priceContainer {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
+  padding-bottom: 1rem;
+  font-size: 2.4rem;
+  border-bottom: 1px solid #eee;
+}
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn {
+  width: 16rem;
+  height: 3.2rem;
+  margin-right: 2rem;
+  background-color: #d7be69;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:disabled {
+  background-color: #eeeeee;
+}
+
+.bookmark {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.properties {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+}
+
+.properties h4 {
+  font-weight: 200;
+  color: #d84315;
+  margin-bottom: 1rem;
+}
+
+.descTitle {
+  font-weight: 200;
+  color: #d84315;
+  margin: 1rem 0;
+}
