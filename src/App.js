@@ -1,4 +1,4 @@
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
@@ -12,8 +12,8 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <ProductContextProvider>
-      <Navbar />
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route path="/:id">
             <Product />

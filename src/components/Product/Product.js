@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { ProductContext } from "../Context/ProductContext";
 
 import styles from "./Product.module.css";
 
@@ -10,8 +13,10 @@ import Container from "../UI/Container";
 
 const Product = () => {
   const [product, setProduct] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState({});
 
   const { id } = useParams();
+  const { toggleBookmarked, addToCart, products } = useContext(ProductContext);
 
   useEffect(() => {
     const fetchProduct = () => {
@@ -24,7 +29,25 @@ const Product = () => {
         });
     };
     fetchProduct();
-  }, [id]);
+
+    setCurrentProduct(products.filter((product) => product.id === id));
+  }, [id, products]);
+
+  const onClickCart = (id) => {
+    addToCart(id);
+    toast.info(`${product.name} ${product.vintageYear} is added to cart`, {
+      className: styles.toast,
+    });
+  };
+
+  const onClickBookmarked = (id) => {
+    toggleBookmarked(id);
+    if (product.bookmarked === false) {
+      toast.info(`${product.name} ${product.vintageYear} is bookmarked`, {
+        className: styles.toast,
+      });
+    }
+  };
 
   const renderContent = product && (
     <div className={styles.productContainer}>
@@ -41,12 +64,16 @@ const Product = () => {
             <button
               type="button"
               className={styles.btn}
-              disabled={product.newQty === 0}
+              disabled={currentProduct.newQty === 0}
+              onClick={() => onClickCart(product.id)}
             >
               ADD TO CART
             </button>
-            <span className={styles.bookmark}>
-              {product.bookmarked === true ? (
+            <span
+              className={styles.bookmark}
+              onClick={() => onClickBookmarked(product.id)}
+            >
+              {currentProduct.bookmarked === true ? (
                 <TurnedInIcon style={{ color: "#d7be69", fontSize: 28 }} />
               ) : (
                 <TurnedInNotIcon style={{ color: "#d7be69", fontSize: 28 }} />
@@ -58,7 +85,7 @@ const Product = () => {
           <div>
             <h4>Region</h4>
             <p>
-              {product.country} {product.region}
+              {product.country}, {product.region}
             </p>
           </div>
           <div>
